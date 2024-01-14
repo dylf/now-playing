@@ -20,4 +20,8 @@
 # Go workspace file
 go.work
 
-result/
+# Binaries
+result
+
+# Sensitive
+.env
