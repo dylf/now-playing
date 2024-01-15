@@ -70,7 +70,6 @@ func (s *Server) spotifyCallback(w http.ResponseWriter, r *http.Request) {
 	}
 
 	log.Printf("Currently playing: %v\n", currentlyPlaying)
-
 }
 
 func (s *Server) HandleNowPlaying(w http.ResponseWriter, r *http.Request) {

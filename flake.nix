@@ -18,6 +18,24 @@
           devShells = {
             default = pkgs.mkShell {
               inputsFrom = [ self'.packages.default ];
+              packages = [ pkgs.postgresql_16 ];
+              shellHook = ''
+                export PGHOST=$HOME/postgres
+                export PGDATA=$PGHOST/data
+                export PGDATABASE=postgres
+                export PGLOG=$PGHOST/postgres.log
+
+                mkdir -p $PGHOST
+
+                if [ ! -d $PGDATA ]; then
+                  initdb --auth=trust --no-locale --encoding=UTF8
+                fi
+
+                if ! pg_ctl status
+                then
+                  pg_ctl start -l $PGLOG -o "--unix_socket_directories='$PGHOST'"
+                fi
+              '';
             };
           };
 
@@ -25,7 +43,6 @@
             default = pkgs.buildGoModule {
               inherit name vendorHash;
               src = ./.;
-              # subPackages = [ "src/server" ];
             };
 
             docker = pkgs.dockerTools.buildImage {
