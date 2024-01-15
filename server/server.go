@@ -1,27 +1,27 @@
-package server 
+package server
 
 import (
 	"fmt"
 	"net/http"
 	"os"
-  "strconv"
-  "time"
+	"strconv"
+	"time"
 
 	_ "github.com/joho/godotenv/autoload"
 )
 
 type Server struct {
-  port int
-  spotifyClient *SpotifyClient
+	port          int
+	spotifyClient *SpotifyClient
 }
 
 func NewServer() *http.Server {
-  port, _ := strconv.Atoi(get_port())
+	port, _ := strconv.Atoi(get_port())
 
-  NewServer := &Server {
-    port: port,
-    spotifyClient: NewClient(),
-  };
+	NewServer := &Server{
+		port:          port,
+		spotifyClient: NewClient(),
+	}
 
 	// Declare Server config
 	server := &http.Server{
@@ -36,20 +36,17 @@ func NewServer() *http.Server {
 
 }
 
-
 type User struct {
 	UID               string
 	Slug              string
 	AuthorizationCode string
-  // Settings scalar?
+	// Settings scalar?
 }
 
 func get_port() string {
-  port := os.Getenv("PORT")
+	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
 	return port
 }
-
-

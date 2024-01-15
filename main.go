@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-  "github.com/dylf/now-playing/server"
+	"github.com/dylf/now-playing/server"
 )
 
 func main() {
@@ -14,4 +14,3 @@ func main() {
 		panic(fmt.Sprintf("cannot start server: %s", err))
 	}
 }
-
