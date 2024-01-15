@@ -25,7 +25,7 @@
             default = pkgs.buildGoModule {
               inherit name vendorHash;
               src = ./.;
-              subPackages = [ "src/server" ];
+              # subPackages = [ "src/server" ];
             };
 
             docker = pkgs.dockerTools.buildImage {
